@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
+
+# Sample signal (a sine wave)
+t = np.linspace (0, 10, 100)
+x = np.sin(2* np.pi * 5 *t)
+
+# Upsampling
+up_factor = 2
+x_up = signal. resample (x, len(x) * up_factor)
+                       
+#Downsampling
+down_factor = 2
+x_down = signal. resample (x, len (x) // down_factor)
+
+                       
+# Plotting
+plt.figure(figsize = (12, 4))
+plt.subplot (1, 3, 1)
+plt.plot(t, x)
+plt.title('Original Signal')
+
+plt.subplot (1, 3, 2)
+plt.plot(np.linspace (0, 10, len (x_up)), x_up)
+plt.title('Upsampled Signal')
+
+plt.subplot (1, 3, 3)
+plt.plot(np.linspace (0, 10, len (x_down)), x_down)
+plt.title('Downsampled Signal')
+
+plt.tight_layout ()
+plt.show()
