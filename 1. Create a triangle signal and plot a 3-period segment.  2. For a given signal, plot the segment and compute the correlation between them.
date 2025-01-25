@@ -1,0 +1,43 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+#1. Triangle Wave
+def triangle_wave (x, period):
+    return 2 * np.abs(x % period - period/2)/ period - 1
+
+#Parameters
+period = 1
+amplitude = 1
+num_periods = 3
+num_samples = 1000
+
+# Generate and plot triangle wave
+t = np.linspace (0, num_periods * period, num_samples)
+signal = amplitude * triangle_wave(t, period)
+plt.plot(t, signal)
+plt.title('Triangle Wave')
+plt.xlabel('Time')
+plt.ylabel('Amplitude')
+plt.show()
+
+# 2. Correlation
+# Sample signal
+signal = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# Define segment and compute correlation
+segment = signal[2:5]
+correlation = np.correlate(signal, segment, mode='full')
+
+# Plot signal, segment, and correlation
+plt.figure(figsize=(10, 4))
+plt.subplot (2, 1, 1)
+plt.plot(signal)
+plt.plot(np.arange(2, 5), segment, 'ro')
+plt.title('Original Signal and Segment')
+
+plt.subplot(2, 1, 2)
+plt.plot (correlation)
+plt.title('Correlation')
+
+plt.tight_layout ()
+plt.show()
